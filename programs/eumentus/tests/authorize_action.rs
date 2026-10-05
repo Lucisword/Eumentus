@@ -31,6 +31,7 @@ fn setup() -> (
     let program = create_program();
 
     let agent = Keypair::new();
+    let verifier=Keypair::new();
     let capability = [7u8; 32];
 
     let (authority_pda, _) = Pubkey::find_program_address(
@@ -47,6 +48,7 @@ fn setup() -> (
         .accounts(CreateCapabilityAuthority {
             principal: program.payer(),
             agent: agent.pubkey(),
+  	    verifier: verifier.pubkey(),
             authority: authority_pda,
             system_program: anchor_lang::system_program::ID,
         })

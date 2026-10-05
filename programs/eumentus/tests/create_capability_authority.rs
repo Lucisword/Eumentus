@@ -21,6 +21,7 @@ fn creates_capability_authority() -> Result<(), Box<dyn std::error::Error>> {
     let program = client.program(eumentus::ID)?;
 
     let agent = Keypair::new();
+    let verifier = Keypair::new();
 
     let capability = [7u8; 32];
     let max_per_action = 1_000_000u64;
@@ -39,6 +40,7 @@ fn creates_capability_authority() -> Result<(), Box<dyn std::error::Error>> {
         .accounts(CreateCapabilityAuthority {
             principal: program.payer(),
             agent: agent.pubkey(),
+	    verifier: verifier.pubkey(),
             authority: authority_pda,
             system_program: anchor_lang::system_program::ID,
         })

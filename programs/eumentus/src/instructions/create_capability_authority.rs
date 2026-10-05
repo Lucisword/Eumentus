@@ -14,6 +14,9 @@ pub struct CreateCapabilityAuthority<'info> {
     /// CHECK: The agent is an identity referenced by the authority.
     pub agent: UncheckedAccount<'info>,
 
+    /// CHECK: The verifier is an identity authorized to verify capability outcomes.
+    pub verifier: UncheckedAccount<'info>,
+
     #[account(
         init,
         payer = principal,
@@ -38,6 +41,7 @@ pub fn handle_create_capability_authority(
     let authority = &mut ctx.accounts.authority;
 
     authority.agent = ctx.accounts.agent.key();
+    authority.verifier = ctx.accounts.verifier.key();
     authority.capability = capability;
     authority.max_per_action = max_per_action;
     authority.state = AuthorityState::Active;

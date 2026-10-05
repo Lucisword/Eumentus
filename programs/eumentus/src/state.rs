@@ -4,6 +4,7 @@ use anchor_lang::prelude::*;
 #[derive(InitSpace)]
 pub struct CapabilityAuthority {
 	pub agent: Pubkey,
+	pub verifier: Pubkey,
 	pub capability: [u8; 32],
 	pub max_per_action: u64,
 	pub state: AuthorityState,
